@@ -44,5 +44,13 @@ class Train:
 
     def set_position(self, position):
         self._position = position
+    
+    def dict(self):
+        return {'line': self._line, 'ID': self._ID, 'direction': self._direction, 'stops': self._stops, 'train_type': self._train_type, 'position': self._position, 'carriers': self._carriers}
 
+    def __str__(self):
+        return f"Line: {self._line} - ID: {self._ID} - Direction: {self._direction} - Stops left: {self._stops} - Type: {self._train_type} - Position: {self._position} - Carriers: {self._carriers}"
+    
+    def __repr__(self):
+        return f"Train(line={self._line}, ID={self._ID}, direction={self._direction}, stops={self._stops}, train_type={self._train_type}, position={self._position}, carriers={self._carriers})"
 
