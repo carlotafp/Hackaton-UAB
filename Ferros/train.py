@@ -1,12 +1,27 @@
 class Train:
 
-    class Carrier:
+    class _Carrier:
         def __init__(self, type_train, name, percent):
             self._name = name
             self._percent = percent
+            self._minusvalid = 0
             if name in ['M1', 'M2']: self._minusvalid = 4
             self._reservats = 8
             if type_train in ['113', '114']: self._reservats += 8
+        
+        def to_dict(self):
+            return {
+                'name': self._name,
+                'percent': self._percent,
+                'minusvalid': self._minusvalid,
+                'reservats': self._reservats
+            }
+        
+        def __str__(self):
+            return f"{self._name} ({self._percent}%)"
+        
+        def __repr__(self):
+            return f"{self._name} ({self._percent}%)"
 
     def __init__(self, line, ID, direction, stops, train_type, position, m1, m2, mi, ri = 0):
         self._line = line                                          # Línia (L7, S2, RL1...)
@@ -18,14 +33,24 @@ class Train:
 
         """Només tenen 3 vagons, el RI no existeix en aquests trens"""
         if train_type in ['113', '213', '213x2']:  # 113 L7, 213 llobregat-anoia
-            self._carriers = {'M1': Carrier(train_type, 'M1', m1), 'M2': Carrier(train_type, 'M2', m2),
-                              'MI': Carrier(train_type, 'MI', mi), 'RI': None}
+            self._carriers = {'M1': self._Carrier(train_type, 'M1', m1), 'M2': self._Carrier(train_type, 'M2', m2),
+                              'MI': self._Carrier(train_type, 'MI', mi), 'RI': None}
         else:
-            self._carriers = {'M1': Carrier(train_type, 'M1', m1), 'M2': Carrier(train_type, 'M2', m2),
-                          'RI': Carrier(train_type, 'RI', ri), 'MI': Carrier(train_type, 'MI', mi)}  # Carrier % status
+            self._carriers = {'M1': self._Carrier(train_type, 'M1', m1), 'M2': self._Carrier(train_type, 'M2', m2),
+                          'RI': self._Carrier(train_type, 'RI', ri), 'MI': self._Carrier(train_type, 'MI', mi)}  # _Carrier % status
 
 
-
+    def to_dict(self):
+        return {
+            'line': self._line,
+            'ID': self._ID,
+            'direction': self._direction,
+            'stops': self._stops,
+            'train_type': self._train_type,
+            'position': self._position,
+            'carriers': {k: v.to_dict() if v else None for k, v in self._carriers.items()}
+        }
+    
     # Getters
     def get_line(self):
         return self._line
@@ -57,3 +82,17 @@ class Train:
 
     def set_position(self, position):
         self._position = position
+    
+    def set_carrier(self, m1, m2, mi, ri = 0):
+        if self._train_type in ['113', '213', '213x2']: 
+            self._carriers = {'M1': self._Carrier(self._train_type, 'M1', m1), 'M2': self._Carrier(self._train_type, 'M2', m2),
+                              'MI': self._Carrier(self._train_type, 'MI', mi), 'RI': None}
+        else:
+            self._carriers = {'M1': self._Carrier(self._train_type, 'M1', m1), 'M2': self._Carrier(self._train_type, 'M2', m2),
+                          'RI': self._Carrier(self._train_type, 'RI', ri), 'MI': self._Carrier(self._train_type, 'MI', mi)}
+
+    def __repr__(self):
+        return f"{self._line} {self._ID} {self._direction} {self._stops} {self._train_type} {self._position} {self._carriers}"
+    
+    def __str__(self):
+        return f"{self._line} {self._ID} {self._direction} {self._stops} {self._train_type} {self._position} {self._carriers}"
