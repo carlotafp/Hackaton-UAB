@@ -1,0 +1,3 @@
+BG grey:   #1d1d1b
+Green:     #6ad500
+White:     #ffffff
