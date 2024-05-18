@@ -10,7 +10,7 @@ class Train:
 
         """Només tenen 3 vagons, el RI no existeix en aquests trens"""
         if train_type in ['113', '213', '213x2']: #113 L7, 213 llobregat-anoia
-            self._carriers['RI'] = 'Vagó inexistent'
+            self._carriers['RI'] = None
 
 
     # Getters

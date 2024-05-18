@@ -15,7 +15,7 @@ class MainApp(MDApp):
         self.theme_cls.theme_style = "Dark"
         self.theme_cls.primary_palette = "DeepOrange"
         Builder.load_file('design.kv')
-        self.url = "https://hackathon-24-dedef-default-rtdb.europe-west1.firebasedatabase.app/"
+        self.url = "https://hackathon-24-dedef-default-rtdb.europe-west1.firebasedatabase.app/.json()"
         self.key = "GLG7U55HoLUl3z3bODHAaNMKQU8G73sCTb5Lp8dz"
         return Ui()
 
@@ -58,7 +58,7 @@ class MainApp(MDApp):
         password_one = self.root.ids.new_password.text
         password_two = self.root.ids.new_password_two.text
 
-        data = requests.get(self.url + "?autn=" + self.key)
+        data = requests.get(self.url + "?auth=" + self.key)
 
         if password_one != password_two:
             state = "LEs contrassenyes no coïncideixen"

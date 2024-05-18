@@ -28,7 +28,7 @@ def get_train_positions():
 
 
 # Function to filter and print train positions
-def filter_and_print_train_positions(positions):
+def filter_and_print_train_positions(positions, line):
     llista_trens = []
     if positions:
         for position in positions:
@@ -37,9 +37,8 @@ def filter_and_print_train_positions(positions):
 
             ID = position.get('id', 'N/A')
             LINE = position.get('lin', 'N/A')
-            if LINE != 'R6':
+            if LINE != line:
                 continue
-
             GEO = position.get('geo_point_2d', 'N/A')
             DIR = position.get('dir', 'N/A')
             NEXT = position.get('properes_parades', 'N/A')
@@ -54,11 +53,11 @@ def filter_and_print_train_positions(positions):
             RI = position.get('ocupacio_ri_percent', 'N/A')
 
             tren = train.Train(LINE, ID, DIR, NEXT, TYPE, GEO, M1, M2, MI, RI)
-            tren_dict = tren.dict()
+            tren_dict = tren.__dict__
             llista_trens.append(tren_dict)
 
-    with open('trens.json', 'w', encoding='utf-8') as f:
-        json.dump(llista_trens, f, indent=4, ensure_ascii=False)
+    with open('trens.json', 'w') as f:
+        json.dump(llista_trens, f, indent=4)
 
 
 # Main function
@@ -67,4 +66,5 @@ if __name__ == "__main__":
     train_positions = get_train_positions()
 
     # Filter and print the train positions
-    filter_and_print_train_positions(train_positions)
+    line = input("Enter line: ")
+    filter_and_print_train_positions(train_positions, line)

@@ -1,0 +1,29 @@
+[
+    {
+        "_line": "L7",
+        "_ID": "6c4bdab144746c0fbf55c60d40|6c2dc6e306",
+        "_direction": "D",
+        "_stops": [
+            {
+                "parada": "GR"
+            },
+            {
+                "parada": "PR"
+            },
+            {
+                "parada": "PC"
+            }
+        ],
+        "_train_type": "114",
+        "_position": {
+            "lon": 2.146515731931157,
+            "lat": 41.40177827841255
+        },
+        "_carriers": {
+            "M1": "23",
+            "M2": "2",
+            "RI": null,
+            "MI": "24"
+        }
+    }
+]
