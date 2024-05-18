@@ -1,0 +1,17 @@
+#: import SwapTransition kivy.uix.screenmanager.SwapTransition
+
+<Ui>:
+    transition: SwapTransition()
+    MDScreen:
+        name: 'principal'
+        md_bg_color: 1,1,1,1
+        MDBoxLayout:
+            orientation: 'vertical'
+            spacing: dp(12)
+            padding: dp(12)
+
+            MBBoxLayout:
+                orientation: 'vertical'
+                size_hint_y: 0.3
+                Image:
+                    source:
