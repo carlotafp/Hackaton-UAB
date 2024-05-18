@@ -14,4 +14,39 @@
                 orientation: 'vertical'
                 size_hint_y: 0.3
                 Image:
-                    source:
+                    source: 'logo.png'
+                    pos_hint: {'center_x': 0.5}
+                MDLabel:
+                    text: 'Iniciar Sessió'
+                    halign: 'center'
+                    color: '#1D1D1B'
+                    font_size: dp(28)
+                    bold: True
+                    pos_hint: {'center_x': 0.5}
+
+            MBBoxLayout:
+                orientation: 'vertical'
+                size_hint_y: 0.3
+                spacing: dp(12)
+                MDTextField:
+                    id: user
+                    hint_text: "Nom d'usuari"
+                    icon_right: 'account'
+                    font_size: dp(18)
+                    icon_right_color: '#1D1D1B'
+                    pos_hint: {'center_x':0.5}
+                MDTextField:
+                    id: password
+                    password: True
+                    icon_right: 'key-variant'
+                    icon_right_color: '#1D1D1B'
+                    hint_text: 'Contrasenya'
+                    font_size: dp(18)
+                    pos_hint: {'center_x':0.5}
+
+                MDLabel:
+                    id: signal_login
+                    text: ''
+                    halign: 'center'
+                    color: '#1D1D1B'
+                    font_size: dp(16)
