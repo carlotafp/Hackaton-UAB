@@ -1,11 +1,11 @@
 class Train:
     def __init__(self, line, ID, direction, stops, train_type, position, m1, m2, ri = 0, mi):
-        self._line = line  # Linia (L7, S2, RL1...)
-        self._ID = ID  # ID tren
-        self._direction = direction  # D/A
-        self._stops = stops  # quantes parades li queden
-        self._train_type = train_type  # tipus tren (113/114/115 etc)
-        self._position = position  # geolocalització
+        self._line = line                                          # Linia (L7, S2, RL1...)
+        self._ID = ID                                              # ID tren
+        self._direction = direction                                # D/A
+        self._stops = stops                                        # quantes parades li queden
+        self._train_type = train_type                              # tipus tren (113/114/115 etc)
+        self._position = position                                  # geolocalització
         self._carriers = {'M1': m1, 'M2': m2, 'RI': ri, 'MI': mi}  # Carrier % status
 
         """Només tenen 3 vagons, el RI no existeix en aquests trens"""
