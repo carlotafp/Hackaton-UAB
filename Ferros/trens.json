@@ -1,9 +1,21 @@
 [
     {
         "line": "S2",
-        "ID": "6c4bdab144746c0fbf55c60d40|682dc7eb0b",
+        "ID": "6c4bdab144746c0fbf55c60d40|682dc2e305",
         "direction": "A",
         "stops": [
+            {
+                "parada": "VO"
+            },
+            {
+                "parada": "SJ"
+            },
+            {
+                "parada": "BT"
+            },
+            {
+                "parada": "UN"
+            },
             {
                 "parada": "SQ"
             },
@@ -25,8 +37,8 @@
         ],
         "train_type": "112",
         "position": {
-            "lon": 2.104434416474833,
-            "lat": 41.508757881830036
+            "lon": 2.075541377650434,
+            "lat": 41.47631021116105
         },
         "carriers": {
             "M1": {
@@ -57,69 +69,9 @@
     },
     {
         "line": "S2",
-        "ID": "6c4bdab144746c0fbf55c60d40|682dc7ea02",
+        "ID": "6c4bdab144746c0fbf55c60d40|682dc2e200",
         "direction": "D",
         "stops": [
-            {
-                "parada": "GR"
-            },
-            {
-                "parada": "PR"
-            },
-            {
-                "parada": "PC"
-            }
-        ],
-        "train_type": "113",
-        "position": {
-            "lon": 2.151484349048594,
-            "lat": 41.400197412995254
-        },
-        "carriers": {
-            "M1": {
-                "name": "M1",
-                "percent": "26",
-                "minusvalid": 4,
-                "reservats": 16
-            },
-            "M2": {
-                "name": "M2",
-                "percent": "24",
-                "minusvalid": 4,
-                "reservats": 16
-            },
-            "MI": {
-                "name": "MI",
-                "percent": "30",
-                "minusvalid": 0,
-                "reservats": 16
-            },
-            "RI": null
-        }
-    },
-    {
-        "line": "S2",
-        "ID": "6c4bdab144746c0fbf55c60d40|682dc7ea06",
-        "direction": "D",
-        "stops": [
-            {
-                "parada": "SQ"
-            },
-            {
-                "parada": "UN"
-            },
-            {
-                "parada": "BT"
-            },
-            {
-                "parada": "SJ"
-            },
-            {
-                "parada": "VO"
-            },
-            {
-                "parada": "SC"
-            },
             {
                 "parada": "VD"
             },
@@ -162,105 +114,31 @@
         ],
         "train_type": "112",
         "position": {
-            "lon": 2.100969631177248,
-            "lat": 41.542593846009915
+            "lon": 2.077697651331091,
+            "lat": 41.466582435976335
         },
         "carriers": {
             "M1": {
                 "name": "M1",
-                "percent": "19",
+                "percent": "10",
                 "minusvalid": 4,
                 "reservats": 8
             },
             "M2": {
                 "name": "M2",
-                "percent": "19",
+                "percent": "10",
                 "minusvalid": 4,
                 "reservats": 8
             },
             "RI": {
                 "name": "RI",
-                "percent": "19",
+                "percent": "10",
                 "minusvalid": 0,
                 "reservats": 8
             },
             "MI": {
                 "name": "MI",
-                "percent": "19",
-                "minusvalid": 0,
-                "reservats": 8
-            }
-        }
-    },
-    {
-        "line": "S2",
-        "ID": "6c4bdab144746c0fbf55c60d40|682dc7ea00",
-        "direction": "D",
-        "stops": [
-            {
-                "parada": "LF"
-            },
-            {
-                "parada": "LP"
-            },
-            {
-                "parada": "VL"
-            },
-            {
-                "parada": "PF"
-            },
-            {
-                "parada": "SR"
-            },
-            {
-                "parada": "TT"
-            },
-            {
-                "parada": "BN"
-            },
-            {
-                "parada": "MN"
-            },
-            {
-                "parada": "SG"
-            },
-            {
-                "parada": "GR"
-            },
-            {
-                "parada": "PR"
-            },
-            {
-                "parada": "PC"
-            }
-        ],
-        "train_type": "112",
-        "position": {
-            "lon": 2.068529790227226,
-            "lat": 41.45871762808153
-        },
-        "carriers": {
-            "M1": {
-                "name": "M1",
-                "percent": "23",
-                "minusvalid": 4,
-                "reservats": 8
-            },
-            "M2": {
-                "name": "M2",
-                "percent": "23",
-                "minusvalid": 4,
-                "reservats": 8
-            },
-            "RI": {
-                "name": "RI",
-                "percent": "23",
-                "minusvalid": 0,
-                "reservats": 8
-            },
-            "MI": {
-                "name": "MI",
-                "percent": "23",
+                "percent": "10",
                 "minusvalid": 0,
                 "reservats": 8
             }

@@ -18,10 +18,11 @@ class Train:
             }
         
         def __str__(self):
-            return f"{self._name} ({self._percent}%)"
+            return f"Name: {self._name}, Percent: {self._percent}%, Minusvalid: {self._minusvalid}, Reserved: {self._reservats}"
         
         def __repr__(self):
-            return f"{self._name} ({self._percent}%)"
+            return f"Name: {self._name}, Percent: {self._percent}%, Minusvalid: {self._minusvalid}, Reserved: {self._reservats}"
+
 
     def __init__(self, line, ID, direction, stops, train_type, position, m1, m2, mi, ri = 0):
         self._line = line                                          # Línia (L7, S2, RL1...)
@@ -52,6 +53,22 @@ class Train:
         }
     
     # Getters
+
+    def decrementa_minusvalids(self):
+        
+        minim = float("inf")
+        cotxe = None
+
+        for element in self._carriers.values():
+            if element._minusvalid > 0:
+                if element._percent < minim:
+                    minim = element._percent
+                    cotxe = element
+        if cotxe:         
+            cotxe._minusvalid -= 1
+        
+        return cotxe
+
     def get_line(self):
         return self._line
 
