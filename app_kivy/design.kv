@@ -5,12 +5,12 @@
     text: 'Selecciona origen'
     text_color: 1, 1, 1, 1
     pos_hint: {'center_x':0.5}
-    on_release: app.menu_open(self)
+    on_release: app.menu_open(self,'origin')
 
 <DropdownButton1@MDFillRoundFlatButton>:
     text: 'Selecciona destí'
     text_color: 1, 1, 1, 1
-    on_release: app.menu_open(self)
+    on_release: app.menu_open(self,'destination')
 
 <DropdownButton2@MDFillRoundFlatButton>:
     text: 'Selecciona el teu grup'
@@ -145,12 +145,19 @@
                 size_hint: 1, 0.7
                 DropdownButton2
                 MDLabel:
-                    text: root.selected_object if root.selected_object is not None else 'Valor per defecte'
+                    text: root.selected_object
                     halign: 'center'
                     color: '#1D1D1B'
                     font_size: dp(20)
                     font_name: 'HelveticaNeue-Medium.otf'
-
+            MDBoxLayout:
+                orientation: 'horizontal'
+                size_hint: 1, 0.3
+                MDFillRoundFlatButton:
+                    text: 'Mostrar selecció'
+                    text_color: 1, 1, 1, 1
+                    pos_hint: {'center_x': 0.5}
+                    on_release: app.show_selected_object()
 
     MDScreen:
         name: 'screen_register'
