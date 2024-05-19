@@ -6,6 +6,7 @@ import json
 # Define the base URL for the specific dataset API
 BASE_URL = "https://dadesobertes.fgc.cat/api/v2/catalog/datasets/posicionament-dels-trens/exports/json"
 
+
 # Function to get train positions from the API
 def get_train_positions():
     try:
@@ -47,7 +48,6 @@ def inicialitza(positions, line):
 
             NEXT = NEXT.split(';')
             NEXT = [json.loads(element) for element in NEXT]
-            
 
             M1 = position.get('ocupacio_m1_percent', 'N/A')
             M2 = position.get('ocupacio_m2_percent', 'N/A')
@@ -63,6 +63,7 @@ def inicialitza(positions, line):
         json.dump(llista_trens_dict, f, indent=4)
 
     return llista_trens_inst
+
 
 def actualitza(positions, ll_trens, line):
     llista_trens_dict = []
@@ -95,7 +96,7 @@ def actualitza(positions, ll_trens, line):
             tren.set_position(GEO)
             tren.set_carrier(M1, M2, MI, RI)
 
-        
+
         else:
 
             LINE = position.get('lin', 'N/A')
@@ -115,7 +116,7 @@ def actualitza(positions, ll_trens, line):
             RI = position.get('ocupacio_ri_percent', 'N/A')
 
             tren = train.Train(LINE, ID, DIR, NEXT, TYPE, GEO, M1, M2, MI, RI)
-        
+
         tren_dict = tren.to_dict()
         llista_trens_dict.append(tren_dict)
         llista_trens_inst.append(tren)
@@ -125,17 +126,17 @@ def actualitza(positions, ll_trens, line):
 
     return llista_trens_inst
 
+
 def main():
     line = "S2"
 
-    train_positions = get_train_positions() 
+    train_positions = get_train_positions()
     ll_trens = inicialitza(train_positions, line)
 
     while True:
-        train_positions = get_train_positions()    
+        train_positions = get_train_positions()
         ll_trens = actualitza(train_positions, ll_trens, line)
         time.sleep(60)
-
 
 
 if __name__ == "__main__":
