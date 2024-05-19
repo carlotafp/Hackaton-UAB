@@ -1,24 +1,44 @@
 from kivymd.app import MDApp
 from kivy.lang import Builder
 from kivy.uix.screenmanager import ScreenManager
-from kivy.core.window import Window
-import requests
 from kivy.properties import StringProperty
+from kivymd.uix.menu import MDDropdownMenu
+import troba_tren
+import requests
 
-Window.keyboard_anim_args = {'d': .2, 't': 'in_out_expo'}
-Window.softinput_mode = "below_target"
 
 class Ui(ScreenManager):
+    selected_object = StringProperty('')
     pass
 
 class MainApp(MDApp):
     font_type = StringProperty('HelveticaNeue-Medium.otf')
+
     def build(self):
         self.theme_cls.theme_style = "Light"
-        self.theme_cls.primary_palette = "Green"
+        self.theme_cls.primary_palette = "LightGreen"
+        self.menu_items = [
+            {"text": "Plaça Catalunya"}, {"text": "Provença"}, {"text": "Gràcia"},
+            {"text": "Sant Gervasi"}, {"text": "Muntaner"}, {"text": "La Bonanova"},
+            {"text": "Les Tres Torres"}, {"text": "Sarrià"}, {"text": "Peu del Funicular"},
+            {"text": "Baixador de Vallvidrera"}, {"text": "Les Planes"}, {"text": "La Floresta"},
+            {"text": "Valldoreix"}, {"text": "Sant Cugat Centre"}, {"text": "Volpelleres"},
+            {"text": "Sant Joan"}, {"text": "Bellaterra"}, {"text": "Universitat Autònoma"},
+            {"text": "Sant Quirze"}, {"text": "Can Feu | Gràcia"}, {"text": "Sabadell Plaça Major"},
+            {"text": "La Creu Alta"}, {"text": "Sabadell Nord"}, {"text": "Sabadell Parc del Nord"}
+        ]
+
+        self.menu_items2 = [
+            {"text": "Cadira de rodes"}, {"text": "Embarassada"}, {"text": "Lisiat/da"},
+            {"text": "3a Edat"}, {"text": "Família"},{"text": "Cotxet"}]
+
+        self.dropdown_menus = {}
+        self.dropdown_menus2 = {}
+
         Builder.load_file('design.kv')
         self.url = "https://hackathon2024-e4b02-default-rtdb.europe-west1.firebasedatabase.app/.json"
         self.key = "AR291WVNaDnDjXWMnwBPOhwhbZOPCElipxPS3Wu8"
+
         return Ui()
 
     def change_font(self):
@@ -31,13 +51,67 @@ class MainApp(MDApp):
                 if hasattr(widget, 'font_name'):
                     widget.font_name = self.font_type
 
+    def menu_open(self, button):
+        if button in self.dropdown_menus:
+            menu_items = self.dropdown_menus[button]
+        else:
+            menu_items = [
+                {
+                    "viewclass": "OneLineListItem",
+                    "text": item["text"],
+                    "on_release": lambda x=item["text"]: self.option_selected(x),
+                } for item in self.menu_items
+            ]
+            self.dropdown_menus[button] = menu_items
+
+        self.open_dropdown(button, menu_items)
+
+    def menu_open2(self, button):
+        if button in self.dropdown_menus2:
+            menu_items = self.dropdown_menus2[button]
+        else:
+            menu_items = [
+                {
+                    "viewclass": "OneLineListItem",
+                    "text": item["text"],
+                    "on_release": lambda x=item["text"]: self.option_selected(x),
+                } for item in self.menu_items2
+            ]
+            self.dropdown_menus2[button] = menu_items
+
+        self.open_dropdown(button, menu_items)
+
+    def open_dropdown(self, button, menu_items):
+        if not hasattr(self, 'dropdown_menu'):
+            self.dropdown_menu = {}
+
+        if button not in self.dropdown_menu:
+            self.dropdown_menu[button] = MDDropdownMenu(
+                caller=button,
+                items=menu_items,
+                width_mult=4
+            )
+
+        self.dropdown_menu[button].open()
+
+
+    def option_selected(self, option):
+        if hasattr(self, 'selected_origin') and hasattr(self, 'selected_destination') and hasattr(self, 'selected_traveler_type'):
+            objecte = troba_tren.troba_tren(self.selected_origin, self.selected_destination, self.selected_traveler_type)
+        elif hasattr(self, 'selected_origin') and hasattr(self, 'selected_destination'):
+            self.selected_traveler_type = option
+        elif hasattr(self, 'selected_origin'):
+            self.selected_destination = option
+        else:
+            self.selected_origin = option
+
+
 
     def login_data(self):
         userx = str(self.root.ids.user.text)
         passwordx = self.root.ids.password.text
         state = False
         data = requests.get(self.url + "?auth=" + self.key)
-
         for key, value in data.json().items():
             user_reg = str(value["User"])
             password_reg = value["Password"]
@@ -81,8 +155,8 @@ class MainApp(MDApp):
                     break
             if user != userx:
                 state = "Registre correcte"
-                send_data = {userx: {"User":userx, "Password":password_one}}
-                requests.patch(url = self.url, json = send_data)
+                send_data = {userx: {"User": userx, "Password": password_one}}
+                requests.patch(url=self.url, json=send_data)
                 self.root.ids.signal_register.text = state
 
         self.root.ids.signal_register.text = state
@@ -98,4 +172,3 @@ class MainApp(MDApp):
 
 if __name__ == "__main__":
     MainApp().run()
-
