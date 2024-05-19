@@ -1,14 +1,32 @@
+#:import SwapTransition kivy.uix.screenmanager.SwapTransition
+#:import MDDropdownMenu kivymd.uix.menu.MDDropdownMenu
+
+<DropdownButton@MDFillRoundFlatButton>:
+    text: 'Selecciona origen'
+    text_color: 1, 1, 1, 1
+    pos_hint: {'center_x':0.5}
+    on_release: app.menu_open(self)
+
+<DropdownButton1@MDFillRoundFlatButton>:
+    text: 'Selecciona destí'
+    text_color: 1, 1, 1, 1
+    on_release: app.menu_open(self)
+
+<DropdownButton2@MDFillRoundFlatButton>:
+    text: 'Selecciona el teu grup'
+    text_color: 1, 1, 1, 1
+    on_release: app.menu_open2(self)
+
 <Ui>:
     transition: SwapTransition()
     MDScreen:
-        name: 'principal'
-        md_bg_color: 1,1,1,1
+        name: 'login'
+        md_bg_color: 1, 1, 1, 1
         MDBoxLayout:
             orientation: 'vertical'
             spacing: dp(12)
             padding: dp(12)
-
-            MBBoxLayout:
+            MDBoxLayout:
                 orientation: 'vertical'
                 size_hint_y: 0.3
                 Image:
@@ -19,10 +37,10 @@
                     halign: 'center'
                     color: '#1D1D1B'
                     font_size: dp(28)
+                    bold: True
                     font_name: 'HelveticaNeue-Medium.otf'
                     pos_hint: {'center_x': 0.5}
-
-            MBBoxLayout:
+            MDBoxLayout:
                 orientation: 'vertical'
                 size_hint_y: 0.3
                 spacing: dp(12)
@@ -31,7 +49,7 @@
                     hint_text: "Nom d'usuari"
                     icon_right: 'account'
                     font_size: dp(18)
-                    pos_hint: {'center_x':0.5}
+                    pos_hint: {'center_x': 0.5}
                     foreground_color: '#1D1D1B'
                     on_focus: self.font_name = 'HelveticaNeue-Medium.otf' if self.focus else 'Roboto'
                 MDTextField:
@@ -40,10 +58,9 @@
                     icon_right: 'key-variant'
                     hint_text: 'Contrasenya'
                     font_size: dp(18)
-                    pos_hint: {'center_x':0.5}
+                    pos_hint: {'center_x': 0.5}
                     foreground_color: '#1D1D1B'
                     on_focus: self.font_name = 'HelveticaNeue-Medium.otf' if self.focus else 'Roboto'
-
                 MDLabel:
                     id: signal_login
                     text: ''
@@ -51,7 +68,6 @@
                     color: '#1D1D1B'
                     font_size: dp(16)
                     font_name: 'HelveticaNeue-Medium.otf'
-
             MDBoxLayout:
                 orientation: 'vertical'
                 size_hint_y: 0.4
@@ -59,120 +75,131 @@
                 MDFillRoundFlatButton:
                     id: bt_ingresar
                     text: 'Entrar'
-                    pos_hint: {'center_x':0.5}
+                    text_color: 1, 1, 1, 1
+                    pos_hint: {'center_x': 0.5}
                     on_release:
                         x = app.login_data()
-                        root.current = 'open_screen' if x == True else None
+                        root.current = 'open_screen' if x==True else None
                 MDFillRoundFlatButton:
                     md_bg_color: '#FFFFFF'
-                    text_color: 29/255,29/255,27/255,1
-                    text: 'Crear compte'
+                    text_color: 29/255, 29/255, 27/255, 1
+                    text: 'Crear un compte'
                     on_release: root.current = 'screen_register'
+                    pos_hint: {'center_x': 0.5}
                 MDFillRoundFlatButton:
                     text: 'Canviar la font (Dislèxia)'
-                    pos_hint: {'center_x':0.5}
+                    md_bg_color: '#FFFFFF'
+                    text_color: 29/255, 29/255, 27/255, 1
+                    pos_hint: {'center_x': 0.5}
                     on_release: app.change_font()
-
-        MDScreen:
-            name: 'open_screen'
-            md_bg_color: 1,1,1,1
+    MDScreen:
+        name: 'open_screen'
+        md_bg_color: 1, 1, 1, 1
+        MDBoxLayout:
+            orientation: 'horizontal'
+            padding: dp(18)
+            spacing: dp(18)
+            MDFloatingActionButton:
+                icon: 'arrow-left'
+                pos_hint: {'center_y': 0.05,'center_x':0}
+                icon_color: 1, 1, 1, 1
+                on_release: root.current = 'login'
+            MDFloatingActionButton:
+                icon: 'arrow-right'
+                text: 'Següent'
+                pos_hint: {'center_y': 0.05,'center_x':1}
+                icon_color: 1, 1, 1, 1
+                on_release: root.current = 'selection_screen'
 
             MDBoxLayout:
-                orientation: 'vertical'
+                orientation: 'horizontal'
+                pos_hint: {'center_y': 0.8,'center_x':0.01}
                 padding: dp(18)
                 spacing: dp(18)
-                MBFloatingActionButton:
-                        icon: 'arrow-left'
-                        pos_hint: {'center_y': 0.5}
-                        color_icon= '#FFFFFF'
-                        on_release: root.current = 'login'
+                DropdownButton
 
-        MDScreen:
-            name: 'screen_register'
-            md_bg_color: 1,1,1,1
-            MDBoxLayout:
-                orientation: 'vertical'
-                padding: dp(12)
-                spacing: dp(12)
                 MDBoxLayout:
                     orientation: 'horizontal'
-                    size_hint: 1,0.2
-                    MBFloatingActionButton:
-                        icon: 'arrow-left'
-                        pos_hint: {'center_y': 0.5}
-                        color_icon= '#FFFFFF'
-                        on_release:
-                            root.current = 'login'
-                            app.clear_signal()
+                    padding: dp(18)
+                    spacing: dp(18)
+                    DropdownButton1
 
-                    MDLabel:
-                        text: 'Crear compte'
-                        halign: 'center'
-                        color: '#1D1D1B'
-                        font_size: dp(28)
-                        font_name: 'HelveticaNeue-Medium.otf'
-                        bold: True
-                        pos_hint: {'center_y':0.5}
+    MDScreen:
+        name: 'selection_screen'
+        md_bg_color: 1,1,1,1
+        MDBoxLayout:
+            orientation: 'vertical'
+            padding: dp(12)
+            spacing: dp(12)
+            MDBoxLayout:
+                orientation: 'horizontal'
+                padding: dp(18)
+                spacing: dp(18)
+                MDFloatingActionButton:
+                    icon: 'arrow-left'
+                    pos_hint: {'center_x': 0.5}
+                    icon_color: 1, 1, 1, 1
+                    on_release: root.current = 'open_screen'
+            MDBoxLayout:
+                orientation: 'vertical'
+                size_hint: 1, 0.7
+                DropdownButton2
+                MDLabel:
+                    text: root.selected_object if root.selected_object is not None else 'Valor per defecte'
+                    halign: 'center'
+                    color: '#1D1D1B'
+                    font_size: dp(20)
+                    font_name: 'HelveticaNeue-Medium.otf'
 
-                MDBoxLayout:
-                    orientation: 'vertical'
-                    size_hint: 1, 0.7
-                    MDLabel:
-                        text: 'Nom d'usuari'
-                        halign: 'center'
-                        color: '#1D1D1B'
-                        font_size: dp(20)
-                        font_name: 'HelveticaNeue-Medium.otf'
-                    MDTextField:
-                        id: new_user
-                        icon_right: 'account'
-                        icon_right_color: '#1D1D1B'
-                        hint_text: 'Usuari'
-                        font_size: dp(20)
-                        pos_hint: {'center_x':0.5}
-                        on_focus: self.font_name = 'HelveticaNeue-Medium.otf' if self.focus else 'Roboto'
-                    MDLabel:
-                        text: 'Ingressi la seva contrasenya'
-                        halign: 'center'
-                        color: '#1D1D1B'
-                        font_size: dp(20)
-                        font_name: 'HelveticaNeue-Medium.otf'
-                    MDTextField:
-                        id: new_password
-                        password: True
-                        icon_right: 'key-variant'
-                        icon_right_color: '#1D1D1B'
-                        hint_text: 'Contrasenya'
-                        font_size: dp(20)
-                        pos_hint: {'center_x':0.5}
-                        on_focus: self.font_name = 'HelveticaNeue-Medium.otf' if self.focus else 'Roboto'
-                    MDLabel:
-                        text: 'Confirmi la seva contrasenya'
-                        halign: 'center'
-                        color: '#1D1D1B'
-                        font_name: 'HelveticaNeue-Medium.otf'
-                        font_size: dp(20)
-                    MDTextField:
-                        id: new_password_two
-                        password: True
-                        icon_right: 'key-variant'
-                        icon_right_color: '#1D1D1B'
-                        hint_text: 'Confirmi la contrasenya'
-                        font_size: dp(20)
-                        font_name: 'HelveticaNeue-Medium.otf'
-                        pos_hint: {'center_x':0.5}
-                MDBoxLayout:
-                    orientation: 'vertical'
-                    size_hint: 1, 0.3
-                    MDLabel:
-                        id: signal_register
-                        text: ''
-                        halign: 'center'
-                        color: '#1D1D1B'
-                        font_name: 'HelveticaNeue-Medium.otf'
-                        font_size: dp(15)
-                    MDFillRoundFlatButton:
-                        id: bt_register
-                        text: 'Registrar-se'
-                        pos_hint: {'center_x':0.5, 'y':0.5}
-                        on_release: app.register_data()
+
+    MDScreen:
+        name: 'screen_register'
+        md_bg_color: 1, 1, 1, 1
+        MDBoxLayout:
+            orientation: 'vertical'
+            padding: dp(12)
+            spacing: dp(12)
+            MDBoxLayout:
+                orientation: 'horizontal'
+                size_hint: 1, 0.2
+                MDFloatingActionButton:
+                    icon: 'arrow-left'
+                    pos_hint: {'center_y': 0.5}
+                    icon_color: 1, 1, 1, 1
+                    on_release:
+                        root.current = 'login'
+                        app.clear_signal()
+                MDLabel:
+                    text: 'Crear compte'
+                    halign: 'center'
+                    color: '#1D1D1B'
+                    font_size: dp(28)
+                    font_name: 'HelveticaNeue-Medium.otf'
+                    bold: True
+                    pos_hint: {'center_y': 0.5}
+            MDBoxLayout:
+                orientation: 'vertical'
+                size_hint: 1, 0.7
+                MDLabel:
+                    text: 'Nom d\'usuari'
+                    halign: 'center'
+                    color: '#1D1D1B'
+                    font_size: dp(20)
+                    font_name: 'HelveticaNeue-Medium.otf'
+                MDTextField:
+                    id: new_user
+                    icon_right: 'account'
+                    icon_right_color: '#1D1D1B'
+                    hint_text: 'Usuari'
+                    font_size: dp(20)
+                    pos_hint: {'center_x': 0.5}
+                    on_focus: self.font_name = 'HelveticaNeue-Medium.otf' if self.focus else 'Roboto'
+                MDLabel:
+                    text: 'Ingressi la seva contrasenya'
+                    halign: 'center'
+                    color: '#1D1D1B'
+                    font_size: dp(20)
+                    font_name: 'HelveticaNeue-Medium.otf'
+                MDTextField:
+                    id: new_password
+                    password:
