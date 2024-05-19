@@ -3,13 +3,14 @@ from kivy.lang import Builder
 from kivy.uix.screenmanager import ScreenManager
 from kivy.properties import StringProperty
 from kivymd.uix.menu import MDDropdownMenu
-import troba_tren
 import requests
-
+from troba_tren import troba_tren
 
 class Ui(ScreenManager):
     selected_object = StringProperty('')
-    pass
+    selected_origin = StringProperty('')
+    selected_destination = StringProperty('')
+    selected_traveler_type = StringProperty('')
 
 class MainApp(MDApp):
     font_type = StringProperty('HelveticaNeue-Medium.otf')
@@ -51,17 +52,26 @@ class MainApp(MDApp):
                 if hasattr(widget, 'font_name'):
                     widget.font_name = self.font_type
 
-    def menu_open(self, button):
+    def menu_open(self, button, category):
         if button in self.dropdown_menus:
             menu_items = self.dropdown_menus[button]
         else:
-            menu_items = [
-                {
-                    "viewclass": "OneLineListItem",
-                    "text": item["text"],
-                    "on_release": lambda x=item["text"]: self.option_selected(x),
-                } for item in self.menu_items
-            ]
+            if category == 'origin':
+                menu_items = [
+                    {
+                        "viewclass": "OneLineListItem",
+                        "text": item["text"],
+                        "on_release": lambda x=item["text"]: self.option_selected(x, 'origin'),
+                    } for item in self.menu_items
+                ]
+            elif category == 'destination':
+                menu_items = [
+                    {
+                        "viewclass": "OneLineListItem",
+                        "text": item["text"],
+                        "on_release": lambda x=item["text"]: self.option_selected(x, 'destination'),
+                    } for item in self.menu_items
+                ]
             self.dropdown_menus[button] = menu_items
 
         self.open_dropdown(button, menu_items)
@@ -74,7 +84,7 @@ class MainApp(MDApp):
                 {
                     "viewclass": "OneLineListItem",
                     "text": item["text"],
-                    "on_release": lambda x=item["text"]: self.option_selected(x),
+                    "on_release": lambda x=item["text"]: self.option_selected(x, 'traveler_type'),
                 } for item in self.menu_items2
             ]
             self.dropdown_menus2[button] = menu_items
@@ -94,18 +104,20 @@ class MainApp(MDApp):
 
         self.dropdown_menu[button].open()
 
+    def option_selected(self, option, category):
+        if category == 'origin':
+            self.root.selected_origin = option
+        elif category == 'destination':
+            self.root.selected_destination = option
+        elif category == 'traveler_type':
+            self.root.selected_traveler_type = option
 
-    def option_selected(self, option):
-        if hasattr(self, 'selected_origin') and hasattr(self, 'selected_destination') and hasattr(self, 'selected_traveler_type'):
-            objecte = troba_tren.troba_tren(self.selected_origin, self.selected_destination, self.selected_traveler_type)
-        elif hasattr(self, 'selected_origin') and hasattr(self, 'selected_destination'):
-            self.selected_traveler_type = option
-        elif hasattr(self, 'selected_origin'):
-            self.selected_destination = option
+    def show_selected_object(self):
+        if self.root.selected_origin and self.root.selected_destination and self.root.selected_traveler_type:
+            tren = troba_tren(self.root.selected_origin, self.root.selected_destination, self.root.selected_traveler_type)
+            self.root.selected_object = str(tren)
         else:
-            self.selected_origin = option
-
-
+            self.root.selected_object = "Seleccioneu totes les opcions"
 
     def login_data(self):
         userx = str(self.root.ids.user.text)
@@ -168,7 +180,6 @@ class MainApp(MDApp):
     def clear_signal(self):
         self.root.ids.signal_register.text = ""
         self.root.ids.signal_login.text = ""
-
 
 if __name__ == "__main__":
     MainApp().run()
