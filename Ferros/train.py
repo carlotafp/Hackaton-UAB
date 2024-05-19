@@ -26,7 +26,7 @@ class Train:
 
     def __init__(self, line, ID, direction, stops, train_type, position, m1, m2, mi, ri = 0):
         self._line = line                                          # Línia (L7, S2, RL1...)
-        self._ID = ID                                              # ID tren
+        self._ID = ID                                              # ID viatje
         self._direction = direction                                # D/A
         self._stops = stops                                        # quantes parades li queden
         self._train_type = train_type                              # tipus tren (113/114/115 etc)
@@ -52,7 +52,12 @@ class Train:
             'carriers': {k: v.to_dict() if v else None for k, v in self._carriers.items()}
         }
     
-    # Getters
+    
+    def queden_minusvalids(self):
+        return not(all(element._minusvalid == 0 for element in self._carriers.values()))
+    
+    def queden_reservats(self):
+        return not(all(element._reservats == 0 for element in self._carriers.values()))
 
     def decrementa_minusvalids(self):
         
@@ -68,6 +73,22 @@ class Train:
             cotxe._minusvalid -= 1
         
         return cotxe
+    
+    def decrementa_reservats(self):
+        
+        minim = float("inf")
+        cotxe = None
+
+        for element in self._carriers.values():
+            if element._reservats > 0:
+                if element._percent < minim:
+                    minim = element._percent
+                    cotxe = element
+        if cotxe:         
+            cotxe._reservats -= 1
+        
+        return cotxe
+
 
     def get_line(self):
         return self._line
