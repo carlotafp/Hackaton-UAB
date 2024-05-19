@@ -209,4 +209,41 @@
                     font_name: 'HelveticaNeue-Medium.otf'
                 MDTextField:
                     id: new_password
-                    password:
+                    password: True
+                    icon_right: 'key-variant'
+                    icon_right_color: '#1D1D1B'
+                    hint_text: 'Contrasenya'
+                    font_size: dp(20)
+                    pos_hint: {'center_x': 0.5}
+                    on_focus: self.font_name = 'HelveticaNeue-Medium.otf' if self.focus else 'Roboto'
+                MDLabel:
+                    text: 'Confirmi la seva contrasenya'
+                    halign: 'center'
+                    color: '#1D1D1B'
+                    font_name: 'HelveticaNeue-Medium.otf'
+                    font_size: dp(20)
+                MDTextField:
+                    id: new_password_two
+                    password: True
+                    icon_right: 'key-variant'
+                    icon_right_color: '#1D1D1B'
+                    hint_text: 'Confirmi la contrasenya'
+                    font_size: dp(20)
+                    font_name: 'HelveticaNeue-Medium.otf'
+                    pos_hint: {'center_x': 0.5}
+            MDBoxLayout:
+                orientation: 'vertical'
+                size_hint: 1, 0.3
+                MDLabel:
+                    id: signal_register
+                    text: ''
+                    halign: 'center'
+                    color: '#1D1D1B'
+                    font_name: 'HelveticaNeue-Medium.otf'
+                    font_size: dp(15)
+                MDFillRoundFlatButton:
+                    id: bt_register
+                    text: 'Registrar-se'
+                    text_color: 1, 1, 1, 1
+                    pos_hint: {'center_x': 0.5, 'y': 0.5}
+                    on_release: app.register_data()
