@@ -1,40 +1,191 @@
 [
     {
         "line": "S2",
-        "ID": "6c4bdab144746c0fbf55c60d40|682dc2e207",
+        "ID": "6c4bdab144746c0fbf55c60d40|682dc7e107",
         "direction": "A",
         "stops": [
+            {
+                "parada": "UN"
+            },
+            {
+                "parada": "SQ"
+            },
+            {
+                "parada": "CF"
+            },
+            {
+                "parada": "PJ"
+            },
+            {
+                "parada": "CT"
+            },
+            {
+                "parada": "NO"
+            },
             {
                 "parada": "PN"
             }
         ],
         "train_type": "112",
         "position": {
-            "lon": 2.076123321094076,
-            "lat": 41.489965248261456
+            "lon": 2.097525148896448,
+            "lat": 41.50156770133327
         },
         "carriers": {
             "M1": {
                 "name": "M1",
-                "percent": "5",
+                "percent": "23",
                 "minusvalid": 4,
                 "reservats": 8
             },
             "M2": {
                 "name": "M2",
-                "percent": "5",
+                "percent": "23",
                 "minusvalid": 4,
                 "reservats": 8
             },
             "RI": {
                 "name": "RI",
-                "percent": "5",
+                "percent": "23",
                 "minusvalid": 0,
                 "reservats": 8
             },
             "MI": {
                 "name": "MI",
-                "percent": "5",
+                "percent": "23",
+                "minusvalid": 0,
+                "reservats": 8
+            }
+        }
+    },
+    {
+        "line": "S2",
+        "ID": "6c4bdab144746c0fbf55c60d40|682dc7e104",
+        "direction": "D",
+        "stops": [
+            {
+                "parada": "SG"
+            },
+            {
+                "parada": "GR"
+            },
+            {
+                "parada": "PR"
+            },
+            {
+                "parada": "PC"
+            }
+        ],
+        "train_type": "112",
+        "position": {
+            "lon": 2.143111519639652,
+            "lat": 41.39880016677667
+        },
+        "carriers": {
+            "M1": {
+                "name": "M1",
+                "percent": "24",
+                "minusvalid": 4,
+                "reservats": 8
+            },
+            "M2": {
+                "name": "M2",
+                "percent": "24",
+                "minusvalid": 4,
+                "reservats": 8
+            },
+            "RI": {
+                "name": "RI",
+                "percent": "24",
+                "minusvalid": 0,
+                "reservats": 8
+            },
+            "MI": {
+                "name": "MI",
+                "percent": "24",
+                "minusvalid": 0,
+                "reservats": 8
+            }
+        }
+    },
+    {
+        "line": "S2",
+        "ID": "6c4bdab144746c0fbf55c60d40|682dc7e105",
+        "direction": "A",
+        "stops": [
+            {
+                "parada": "VL"
+            },
+            {
+                "parada": "LP"
+            },
+            {
+                "parada": "LF"
+            },
+            {
+                "parada": "VD"
+            },
+            {
+                "parada": "SC"
+            },
+            {
+                "parada": "VO"
+            },
+            {
+                "parada": "SJ"
+            },
+            {
+                "parada": "BT"
+            },
+            {
+                "parada": "UN"
+            },
+            {
+                "parada": "SQ"
+            },
+            {
+                "parada": "CF"
+            },
+            {
+                "parada": "PJ"
+            },
+            {
+                "parada": "CT"
+            },
+            {
+                "parada": "NO"
+            },
+            {
+                "parada": "PN"
+            }
+        ],
+        "train_type": "112",
+        "position": {
+            "lon": 2.103958810568327,
+            "lat": 41.41471775190777
+        },
+        "carriers": {
+            "M1": {
+                "name": "M1",
+                "percent": "27",
+                "minusvalid": 4,
+                "reservats": 8
+            },
+            "M2": {
+                "name": "M2",
+                "percent": "27",
+                "minusvalid": 4,
+                "reservats": 8
+            },
+            "RI": {
+                "name": "RI",
+                "percent": "27",
+                "minusvalid": 0,
+                "reservats": 8
+            },
+            "MI": {
+                "name": "MI",
+                "percent": "27",
                 "minusvalid": 0,
                 "reservats": 8
             }
