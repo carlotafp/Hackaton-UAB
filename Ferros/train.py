@@ -133,4 +133,3 @@ class Train:
 
     def __str__(self):
         return f"{self._line} {self._ID} {self._direction} {self._stops} {self._train_type} {self._position} {self._carriers}"
-        return f"{self._line} {self._ID} {self._direction} {self._stops} {self._train_type} {self._position} {self._carriers}"
